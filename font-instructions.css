@@ -1,0 +1,24 @@
+/* If you want to add the Akira Expanded font locally, 
+   uncomment and modify this section: */
+
+/*
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('/fonts/AkiraExpanded-Bold.woff2') format('woff2'),
+       url('/fonts/AkiraExpanded-Bold.woff') format('woff');
+  font-weight: 800;
+  font-display: swap;
+}
+
+.title {
+  font-family: 'Akira Expanded', 'Oswald', Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #000000;
+  margin: 1rem 0;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+*/
