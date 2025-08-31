@@ -4,7 +4,7 @@ import blueBackground from '../../../assets/images/background/blue.png';
 import orangeBackground from '../../../assets/images/background/orange.png';
 import purpleBackground from '../../../assets/images/background/purple.png';
 import yellowBackground from '../../../assets/images/background/yellow.png';
-import {Top, Twitter, LinkedIn, FaceBook} from '../../../assets/svg/svg-export';
+import {Top, Instagram, LinkedIn, X} from '../../../assets/svg/svg-export';
 import './results.css';
 
 interface ResultsProps {
@@ -121,11 +121,11 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
           <div className="share-section">
             <div className="share-buttons">
               <div 
-              title='Share on Twitter'
-                className="share-btn twitter"
-                onClick={() => handleShare('twitter')}
+              title='Share on Facebook'
+                className="share-btn facebook"
+                onClick={() => handleShare('facebook')}
               >
-                <Twitter />
+                <Instagram />
               </div>
               <div 
               title='Share on LinkedIn'
@@ -135,11 +135,11 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
                 <LinkedIn />
               </div>
               <div 
-              title='Share on Facebook'
-                className="share-btn facebook"
-                onClick={() => handleShare('facebook')}
+              title='Share on Twitter'
+                className="share-btn twitter"
+                onClick={() => handleShare('twitter')}
               >
-                <FaceBook />
+                <X />
               </div>
             </div>
             <p>Share on Social Media!</p>
