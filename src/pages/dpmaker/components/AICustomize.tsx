@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Gemini, Prompt } from '../../../assets/svg/svg-export';
 
 interface Part {
-    inline_data?: {
+    inlineData?: {
         mime_type: string;
         data: string;
     };
@@ -105,11 +105,11 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
                 return;
             }
 
-            const imagePart = candidate.content.parts.find((p: Part) => p.inline_data);
+            const imagePart = candidate.content.parts.find((p: Part) => p.inlineData);
             const textPart = candidate.content.parts.find((p: Part) => p.text);
 
             if (imagePart) {
-                const newImageData = imagePart.inline_data?.data;
+                const newImageData = imagePart.inlineData?.data;
                 if (newImageData) {
                     const newImageSrc = `data:${mimeType};base64,${newImageData}`;
                     setProcessedImage(newImageSrc);
