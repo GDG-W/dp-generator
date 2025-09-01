@@ -94,6 +94,7 @@ export const DPMaker = () => {
           ) : currentStep === 'customize' ? (
             <AICustomize
               image={finalImage || croppedImage || uploadedImage || ''}
+              originalCroppedImage={croppedImage || uploadedImage || ''}
               userName={userName}
               onUserNameChange={setUserName}
               onGenerateDP={handleGenerateDP}

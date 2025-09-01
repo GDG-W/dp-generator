@@ -60,7 +60,6 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
 
   return (
     <div className="results-container">
-
       <div className="results-content">
         <div className="preview-section">
           <div 

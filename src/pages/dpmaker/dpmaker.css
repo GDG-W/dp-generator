@@ -36,18 +36,18 @@
 }
 
 .dpmaker-container .shape-pink {
-  left: -150px;
+  left: -330px;
   opacity: 1;
 }
 .dpmaker-container .shape-green {
-  right: -120px;
+  right: -290px;
   opacity: 1;
 }
 
 .dpmaker-container .title {
   font-family: 'Akira', 'Arial Black', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  font-size:32px;
   text-align: center;
   color: #000000;
   margin: 1rem 0;
@@ -58,20 +58,17 @@
 .dpmaker-container .subtitle {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 500;
-  font-size: 1rem;
-  color: #666;
+  font-size: 16px;
+  color: #5c5c5c;
   margin: 1rem 0;
   text-align: center;
   opacity: 0.8;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .upload-section {
   display: flex;
   justify-content: center;
-  padding: 2rem 1rem;
   position: relative;
   z-index: 2;
 }
@@ -107,36 +104,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
   pointer-events: none;
 }
 
 .upload-box{
   background-color: #ffffff;
-  border: 1px dashed;
+  border: 1px #FFECC0;
+  border-radius: 12px;
   padding: 1px;
   width: 400px;
   height: 126px;
-
 }
 .upload-title{
   font-family: 'Inter', Arial, sans-serif;
-font-weight: 500;
-font-style: Medium;
-font-size: 16px;
-line-height: 24px;
-letter-spacing: -3%;
-
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -3%;
+  color: #171717;
 }
 .upload-text {
   font-family: 'Inter', Arial, sans-serif;
   font-size: 1rem;
   color: #666;
   line-height: 1.4;
+  font-size: 14px;
 }
 
 .click-text {
-  color: #333;
+  color: #171717;
   font-weight: 600;
 }
 
@@ -201,24 +198,26 @@ letter-spacing: -3%;
   }
   
   .dpmaker-container .title {
-    font-size: clamp(2rem, 6vw, 2.8rem);
+    font-size: 24px;
   }
   
   .samples-grid {
     grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
-  
-  .upload-zone {
-    padding: 2rem 1rem;
-    min-height: 200px;
+  .dpmaker-container .logo-section {
+  width: 100%;
+}
+  .logo-content .subtitle {
+    font-size: 14px;
   }
-  
+  .upload-zone {
+  border: none;
+  border-radius: 24px;
+  height: 100%;
+  width: 100%;
+}
   .designer-tag {
-    position: static;
-    margin: 2rem auto;
-    transform: none;
-    display: flex;
-    justify-content: center;
+    display: none;
   }
   
   .action-buttons {
@@ -257,6 +256,9 @@ letter-spacing: -3%;
   
   .upload-zone {
     padding: 1.5rem 1rem;
+  }
+  .upload-title{
+    font-family: 'Akira', 'Arial Black', sans-serif ;
   }
   
   .crop-selection {

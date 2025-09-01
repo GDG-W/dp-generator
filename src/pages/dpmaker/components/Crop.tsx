@@ -17,7 +17,7 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
   const [cropArea, setCropArea] = useState<CropArea>({
     x: 20,
     y: 20,
-    width: 70,
+    width: 100,
     height: 75
   });
 
@@ -29,24 +29,20 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
     const img = new Image();
 
     img.onload = () => {
-      // Calculate actual crop dimensions
       const cropX = (img.width * cropArea.x) / 100;
       const cropY = (img.height * cropArea.y) / 100;
       const cropWidth = (img.width * cropArea.width) / 100;
       const cropHeight = (img.height * cropArea.height) / 100;
 
-      // Set canvas size to crop dimensions
       canvas.width = cropWidth;
       canvas.height = cropHeight;
 
-      // Draw the cropped portion
       ctx?.drawImage(
         img,
-        cropX, cropY, cropWidth, cropHeight, // source rectangle
-        0, 0, cropWidth, cropHeight // destination rectangle
+        cropX, cropY, cropWidth, cropHeight, 
+        0, 0, cropWidth, cropHeight 
       );
 
-      // Convert to data URL and save
       const croppedDataUrl = canvas.toDataURL('image/png');
       onCrop(croppedDataUrl);
     };
@@ -54,7 +50,6 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
     img.src = image;
   }, [image, cropArea, onCrop]);
 
-  // Handle crop area dragging
   const handleCropMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     const startX = e.clientX;
@@ -155,9 +150,6 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
             }}
             onMouseDown={handleCropMouseDown}
           >
-            {/* <div className="crop-handle crop-handle-move">DRAG</div> */}
-            
-            {/* Resize handles */}
             <div 
               className="resize-handle resize-handle-tl"
               onMouseDown={(e) => handleResizeMouseDown(e, 'top-left')}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { Gemini, Prompt } from '../../../assets/svg/svg-export';
 
 interface Part {
@@ -11,27 +11,50 @@ interface Part {
 
 interface AICustomizeProps {
     image: string;
+    originalCroppedImage: string;
     userName: string;
     onUserNameChange: (name: string) => void;
     onGenerateDP: () => void;
     onImageUpdate?: (newImage: string) => void;
 }
 
-export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, onImageUpdate }: AICustomizeProps) => {
+interface ChatMessage {
+    type: 'user' | 'ai';
+    content: string;
+}
+
+interface AICustomizeProps {
+    image: string;
+    originalCroppedImage: string;
+    userName: string;
+    onUserNameChange: (name: string) => void;
+    onGenerateDP: () => void;
+    onImageUpdate?: (newImage: string) => void;
+}
+
+export const AICustomize = ({ image, originalCroppedImage, userName, onUserNameChange, onGenerateDP, onImageUpdate }: AICustomizeProps) => {
     const [useGemini, setUseGemini] = useState(false);
     const [geminiPrompt, setGeminiPrompt] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
     const [processedImage, setProcessedImage] = useState<string | null>(null);
+    const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+    const [showChat, setShowChat] = useState(false);
 
     const handleApply = async () => {
         if (!geminiPrompt.trim()) {
-            setError('Please enter a prompt for styling');
             return;
         }
 
         setIsLoading(true);
-        setError(null);
+        setShowChat(true);
+
+        const userMessage: ChatMessage = {
+            type: 'user',
+            content: geminiPrompt,
+        };
+        setChatMessages(prev => [...prev, userMessage]);
+        
+        setGeminiPrompt('');
 
         try {
             let base64Image = '';
@@ -75,10 +98,6 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
                 }
             };
 
-            console.log('Attempting API call to:', apiUrl);
-            console.log('Image data length:', base64Image.length);
-            console.log('Payload:', JSON.stringify(payload, null, 2));
-
             const imageGenResponse = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -90,7 +109,6 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
             if (!imageGenResponse.ok) {
                 const errorText = await imageGenResponse.text();
                 console.error('API Error:', imageGenResponse.status, imageGenResponse.statusText, errorText);
-                setError(`API request failed with status code: ${imageGenResponse.status}.`);
                 setIsLoading(false);
                 return;
             }
@@ -101,7 +119,6 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
             
             if (!candidate || !candidate.content || !candidate.content.parts || candidate.content.parts.length === 0) {
                 console.error('Unexpected API response format:', data);
-                setError('The API response was successful, but the content part was empty. Please try a different prompt.');
                 return;
             }
 
@@ -114,19 +131,43 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
                     const newImageSrc = `data:${mimeType};base64,${newImageData}`;
                     setProcessedImage(newImageSrc);
                     onImageUpdate?.(newImageSrc);
+                    
+                    const aiMessage: ChatMessage = {
+                        type: 'ai',
+                        content: "Done.",
+                    };
+                    setChatMessages(prev => [...prev, aiMessage]);
                 } else {
-                    setError('The API returned an image object, but no image data.');
+                    const errorMsg = 'No image data.';
+                    const aiMessage: ChatMessage = {
+                        type: 'ai',
+                        content: errorMsg,
+                    };
+                    setChatMessages(prev => [...prev, aiMessage]);
                 }
             } else if (textPart) {
-                setError(`API message: ${textPart.text}`);
+                const aiMessage: ChatMessage = {
+                    type: 'ai',
+                    content: textPart.text || 'I  couldn\'t process the image.',
+                };
+                setChatMessages(prev => [...prev, aiMessage]);
             } else {
-                console.error('Unexpected API response format:', data);
-                setError('The API did not return a valid image or a clear error message. Check the console for full response data.');
+                const errorMsg = 'This is not a valid response. Please try again.';
+                const aiMessage: ChatMessage = {
+                    type: 'ai',
+                    content: errorMsg,
+                };
+                setChatMessages(prev => [...prev, aiMessage]);
             }
 
         } catch (err) {
             console.error('Image generation error:', err);
-            setError('Failed to apply styling. Check the console for more details.');
+            const errorMsg = 'Failed to apply styling. Please try again.';
+            const aiMessage: ChatMessage = {
+                type: 'ai',
+                content: errorMsg,
+            };
+            setChatMessages(prev => [...prev, aiMessage]);
         } finally {
             setIsLoading(false);
         }
@@ -134,7 +175,10 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
 
     const handleReset = () => {
         setProcessedImage(null);
-        onImageUpdate?.(image);
+        setGeminiPrompt('');
+        setShowChat(false);
+        setChatMessages([]);
+        onImageUpdate?.(originalCroppedImage);
     };
 
     return (
@@ -184,27 +228,29 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
                                 <div className="gemini-header">
                                     <Gemini/>
                                 </div>
-                                {error && (
-                                    <div className="error-message" style={{ color: 'red', fontSize: '14px', marginBottom: '8px' }}>
-                                        {error}
-                                    </div>
-                                )}
-                                {processedImage && (
-                                    <div style={{ marginBottom: '8px' }}>
-                                        <button
-                                            onClick={handleReset}
-                                            style={{
-                                                background: 'transparent',
-                                                border: '1px solid #ccc',
-                                                padding: '4px 8px',
-                                                borderRadius: '4px',
-                                                fontSize: '12px',
-                                                cursor: 'pointer',
-                                                color: '#666'
-                                            }}
-                                        >
-                                            Reset to Original
-                                        </button>
+
+                                {showChat && (
+                                    <div className="chat-container">
+                                        <div className="chat-messages">
+                                            {chatMessages.map((message, index) => (
+                                                <div key={index} className={`chat-message ${message.type}`}>
+                                                    <div className="message-content">
+                                                        {message.content}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            {isLoading && (
+                                                <div className="chat-message ai">
+                                                    <div className="message-content">
+                                                        <div className="typing-indicator">
+                                                            <span></span>
+                                                            <span></span>
+                                                            <span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 )}
 
@@ -216,7 +262,14 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
                                         onChange={(e) => setGeminiPrompt(e.target.value)}
                                         className="gemini-input"
                                         disabled={isLoading}
+                                        onKeyPress={(e) => {
+                                            if (e.key === 'Enter' && !isLoading && geminiPrompt.trim()) {
+                                                handleApply();
+                                            }
+                                        }}
                                     />
+                                    <div style={{ marginBottom: '8px' }}>
+                                    </div>
                                     <button
                                         className="apply-btn"
                                         onClick={handleApply}
@@ -226,8 +279,14 @@ export const AICustomize = ({ image, userName, onUserNameChange, onGenerateDP, o
                                             cursor: isLoading || !geminiPrompt.trim() ? 'not-allowed' : 'pointer'
                                         }}
                                     >
-                                        {isLoading ? 'APPLYING...' : 'APPLY'}
+                                        {isLoading ? 'APPLYING' : 'APPLY'}
                                     </button>
+                                    <button
+                                            onClick={handleReset}
+                                            className="undo-btn"
+                                        >
+                                            UNDO
+                                        </button>
                                 </div>
                             </div>
                         )}
