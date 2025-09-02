@@ -161,18 +161,15 @@
   .crop-selection {
     cursor: move;
     display: flex;
-    /* Improve touch interaction */
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
   }
 
   .resize-handle {
-    /* Make touch targets larger on mobile */
     width: 20px;
     height: 20px;
     border: 3px solid white;
-    /* Improve touch responsiveness */
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
@@ -198,7 +195,6 @@
     right: -10px;
   }
 
-  /* Add visual feedback for mobile */
   .crop-selection:active {
     border-color: #FFD700;
   }
