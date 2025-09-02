@@ -39,7 +39,7 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
       });
 
       const link = document.createElement('a');
-      link.download = `${userName}-DevFestLagos-DP.png`;
+      link.download = `${userName}-DevFestLagos.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     } catch (error) {

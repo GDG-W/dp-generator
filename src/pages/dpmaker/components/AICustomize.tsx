@@ -257,7 +257,7 @@ export const AICustomize = ({ image, originalCroppedImage, userName, onUserNameC
                                 <div className="gemini-input-row">
                                     <input
                                         type="text"
-                                        placeholder="Make me wear glasses and a turtleneck"
+                                        placeholder="eg: Make me wear glasses and a turtleneck"
                                         value={geminiPrompt}
                                         onChange={(e) => setGeminiPrompt(e.target.value)}
                                         className="gemini-input"

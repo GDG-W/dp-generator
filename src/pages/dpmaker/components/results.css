@@ -26,12 +26,15 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .user-image {
   width: 280px;
   height: 280px;
   object-fit: cover;
+  object-position: center;
   position: relative;
   z-index: 1;
 }
@@ -178,6 +181,9 @@
   .user-image {
     width: 240px;
     height: 240px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
   }
   
   .customization-section {
