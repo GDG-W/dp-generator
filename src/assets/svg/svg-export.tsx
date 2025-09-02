@@ -199,7 +199,6 @@ export const Prompt = ({width, height, color}: TSvgExports) => (
 </defs>
 </svg>
 )
-
 export const WorldClass = ({width, height, color}: TSvgExports) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={width || "150"} height={height || "150"} viewBox="0 0 184 182" fill="none">
 <g filter="url(#filter0_d_9171_486)">

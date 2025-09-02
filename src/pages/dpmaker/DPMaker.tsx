@@ -2,9 +2,7 @@ import './dpmaker.css'
 import './dpai.css'
 import './dpcrop.css'
 import devfestLogo from '../../assets/images/home/devfestlogo.png'
-import image1 from '../../assets/images/home/joint.png'
-import productdesign from '../../assets/images/vector/productdesign.png'
-import { Invert, Vector } from '../../assets/svg/svg-export'
+import { Invert, Vector, ProductDesign } from '../../assets/svg/svg-export'
 import { useState } from 'react'
 import { Upload, Crop, AICustomize, Results } from './components'
 
@@ -22,7 +20,7 @@ export const DPMaker = () => {
 
   const handleImageCrop = (croppedImg: string) => {
     setCroppedImage(croppedImg);
-    setFinalImage(croppedImg); // Set as initial final image
+    setFinalImage(croppedImg); 
     setCurrentStep('customize');
   };
 
@@ -48,12 +46,10 @@ export const DPMaker = () => {
       return;
     }
 
-    // Move to results step
     setCurrentStep('results');
   };
 
   const handleCreateAnother = () => {
-    // Reset all state and go back to upload
     setUploadedImage(null);
     setCroppedImage(null);
     setFinalImage(null);
@@ -112,18 +108,8 @@ export const DPMaker = () => {
 
       {currentStep !== 'results' && (
         <>
-          <section className="samples-section">
-            <div className="samples-grid">
-              <div className="sample-image">
-                <img className='image' src={image1} alt="Sample DP 1" />
-              </div>
-            </div>
-          </section>
-
           <div className="designer-tag">
-            <div className="tag-content">
-              <img src={productdesign} alt="" />
-            </div>
+              <ProductDesign />
           </div>
         </>
       )}

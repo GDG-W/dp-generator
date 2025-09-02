@@ -81,7 +81,6 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
     document.addEventListener('mouseup', handleMouseUp);
   }, [cropArea.x, cropArea.y, cropArea.width, cropArea.height]);
 
-  // Handle crop area resizing
   const handleResizeMouseDown = useCallback((e: React.MouseEvent, corner: string) => {
     e.preventDefault();
     e.stopPropagation();
