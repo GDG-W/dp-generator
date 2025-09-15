@@ -1,1 +1,6 @@
-
+:root{
+    background-color: #F6B51E;
+    padding: 8px;
+    height: 100vh;
+    /* overflow: hidden; */
+}

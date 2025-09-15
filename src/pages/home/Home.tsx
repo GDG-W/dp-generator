@@ -1,10 +1,9 @@
 import './home.css'
-import devfestLogo from '../../assets/images/home/devfestlogo.png'
 import image1 from '../../assets/images/home/joint.png'
 import mobile from '../../assets/images/home/mobile.png'
 import { useNavigate } from 'react-router-dom'
 import {Invert, Vector} from '../../assets/svg/svg-export'
-
+import Logo from './components/logo'
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -16,13 +15,12 @@ export const Home = () => {
   return (
     <div className="home-container">
       <header className="header">
-        <div className="logo-section">
-          <div className="logo-shapes">
+        <div className="logo-shapes">
             <div className="shape shape-pink"><Invert/></div>
             <div className="shape shape-green"> <Vector/></div>
           </div>
-          <div className="logo-content">
-            <img src={devfestLogo} alt="DevFest Lagos" className="logo" />
+          <Logo/>
+            <div className="logo-content">
             <h1 className="hometitle">
               DEVFEST LAGOS<br />
               DP MAKER
@@ -30,7 +28,6 @@ export const Home = () => {
             <p className="homesubtitle">Tell everyone you will be there!</p>
             <button type='button' title="Create your DP" className="cta-button" onClick={handleCreateDP}>CREATE YOURS!</button>
           </div>
-        </div>
       </header>
 
       <section className="samples-section">
@@ -47,7 +44,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
-    </div>
+      </div>
   )
 }
 

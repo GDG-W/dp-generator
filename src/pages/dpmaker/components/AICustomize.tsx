@@ -268,8 +268,8 @@ export const AICustomize = ({ image, originalCroppedImage, userName, onUserNameC
                                             }
                                         }}
                                     />
-                                    <div style={{ marginBottom: '8px' }}>
-                                    </div>
+                                    {/* <div style={{ marginBottom: '8px' }}>
+                                    </div> */}
                                     <button
                                         className="apply-btn"
                                         onClick={handleApply}

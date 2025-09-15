@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import devfestLogo from '../../../assets/images/home/devfestlogo.png';
+// import devfestLogo from '../../../assets/images/home/devfestlogo.png';
 import blueBackground from '../../../assets/images/background/blue.png';
 import orangeBackground from '../../../assets/images/background/orange.png';
 import purpleBackground from '../../../assets/images/background/purple.png';
-import yellowBackground from '../../../assets/images/background/yellow.png';
-import {Top, Instagram, LinkedIn, X} from '../../../assets/svg/svg-export';
+import whiteBackground from '../../../assets/images/background/yellow.png';
+import {Top, Instagram, LinkedIn, X, DevfestLogo} from '../../../assets/svg/svg-export';
 import './results.css';
 
 interface ResultsProps {
@@ -20,7 +20,7 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
     { name: 'Blue', image: blueBackground },
     { name: 'Orange', image: orangeBackground },
     { name: 'Purple', image: purpleBackground },
-    { name: 'Yellow', image: yellowBackground }
+    { name: 'White', image: whiteBackground }
   ];
 
   const handleDownload = async () => {
@@ -48,12 +48,12 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
     }
   };
 
-  const handleShare = (platform: 'twitter' | 'linkedin' | 'facebook') => {
+  const handleShare = (platform: 'twitter' | 'linkedin' | 'instagram') => {
     const message = encodeURIComponent(`I'll be at #DevFestLagos2025!`);
     const urls = {
       twitter: `https://twitter.com/intent/tweet?text=${message}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin)}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.origin)}`
+      instagram: `https://www.instagram.com`
     };
     window.open(urls[platform], '_blank');
   };
@@ -69,9 +69,7 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
-          >
-            <img src={finalImage} alt="Your DP" className="user-image" />
-            
+          >            
             <div className="frame-overlay">
               <div className="frame-message">
                 <span>I can't wait to be at</span>
@@ -81,15 +79,18 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
               </div>
               
               <div className="devfest-logo">
-                <img src={devfestLogo} alt="DevFest Lagos" />
+                <DevfestLogo/>
+                <p>DevFest Lagos</p>
               </div>
               
               <div className="user-name-overlay">
                 <h2 className="user-name">{userName}</h2>
               </div>
             </div>
+            <div className="user-image-container">
+              <img src={finalImage} alt="Your DP" className="user-image" />
+            </div>
           </div>
-
           <div className="background-selector">
             <div className="background-options">
               {backgroundOptions.map((bg) => (
@@ -120,9 +121,9 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
           <div className="share-section">
             <div className="share-buttons">
               <div 
-              title='Share on Facebook'
-                className="share-btn facebook"
-                onClick={() => handleShare('facebook')}
+              title='Share on Instagram'
+                className="share-btn instagram"
+                onClick={() => handleShare('instagram')}
               >
                 <Instagram />
               </div>
