@@ -298,11 +298,9 @@
     gap: 2rem;
     padding: 0 16px;
   }
-  
   .prompt-helper {
     display: none;
   }
-  
   .form-container {
     display: flex;
     flex-direction: column;
@@ -312,17 +310,14 @@
     padding: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
-
   .form-field {
     gap: 12px;
   }
-
   .form-label {
     font-size: 16px;
     font-weight: 600;
     color: #333;
   }
-
   .name-input {
     padding: 16px;
     border: 2px solid #e0e0e0;
@@ -330,7 +325,6 @@
     font-size: 16px;
     background: #fafafa;
   }
-
   .gemini-option {
     display: flex;
     align-items: center;
@@ -339,12 +333,10 @@
     border-radius: 12px;
     cursor: pointer;
   }
-
   .gemini-checkbox {
     width: 20px;
     height: 20px;
   }
-
   .checkbox-text {
     font-size: 16px;
     font-weight: 600;
@@ -353,7 +345,6 @@
     align-items: center;
     gap: 8px;
   }
-
   .gemini-prompt-container {
     background: #ffffff;
     border: 2px solid #f0f0f0;
@@ -362,21 +353,18 @@
     margin-top: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
-
   .gemini-header {
     position: absolute;
     top: 16px;
     left: 16px;
     font-size: 20px;
   }
-
   .gemini-input-row {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding-top: 32px;
   }
-
   .gemini-input {
     width: 100%;
     padding: 16px 20px;
@@ -384,72 +372,29 @@
     border-radius: 12px;
     font-size: 16px;
     background: #fafafa;
-    color: #666;
+    color: #000000;
     box-sizing: border-box;
   }
-
   .gemini-input::placeholder {
     color: #000000;
     font-style: italic;
   }
-
   .apply-btn {
     width: 100%;
-    padding: 16px;
-    background: #F6D55C;
-    color: #333;
-    border: none;
-    border-radius: 24px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
   }
-
   .apply-btn:hover:not(:disabled) {
     background: #F4D03F;
     transform: translateY(-1px);
   }
-
   .apply-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
   }
-
-  .undo-btn {
-    width: 100%;
-    padding: 16px;
-    background: #f1f3f4;
-    color: #333;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
   .chat-container {
     margin: 16px 0;
 }
-
+}
 @media screen and (max-width: 900px) {
-  .customize-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    padding: 1rem;
-  }
-
-  .image-display,
-  .form-container {
-    width: 100%;
-    max-width: 400px;
-  }
-}
-}
-
-@media (max-width: 900px) {
   .customize-container {
     flex-direction: column;
     align-items: center;

@@ -1,9 +1,10 @@
 import './dpmaker.css'
 import './dpai.css'
 import './dpcrop.css'
-import { Invert, Vector, ProductDesign, DevfestLogo } from '../../assets/svg/svg-export'
+import { Invert, Vector, ProductDesign} from '../../assets/svg/svg-export'
 import { useState } from 'react'
 import { Upload, Crop, AICustomize, Results } from './components'
+import Logo from '../home/components/logo'
 
 export const DPMaker = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -58,15 +59,12 @@ export const DPMaker = () => {
 
   return (
     <div className="dpmaker-container">
-      <header className="header">
-          <div className="logo-shapes">
+      <div className="logo-shapes">
             <div className="shape shape-pink"><Invert /></div>
             <div className="shape shape-green"><Vector /></div>
           </div>
-          <div className='logo-container'>
-            <DevfestLogo/>
-            <p>DevFest Lagos</p>
-            </div>
+      <header className="header">
+          <Logo />
           <div className="logo-content"> 
             <h1 className="title">DEVFEST LAGOS DP MAKER</h1>
             <p className="subtitle">Create a DevFest branded image to announce your attendance with your network! 📸</p>

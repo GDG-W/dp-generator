@@ -14,11 +14,11 @@ export const Home = () => {
 
   return (
     <div className="home-container">
-      <header className="header">
-        <div className="logo-shapes">
+      <div className="logo-shapes">
             <div className="shape shape-pink"><Invert/></div>
             <div className="shape shape-green"> <Vector/></div>
           </div>
+      <header className="header">
           <Logo/>
             <div className="logo-content">
             <h1 className="hometitle">

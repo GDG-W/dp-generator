@@ -113,7 +113,6 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
 
         <div className="customization-section">
           <h3>Share the word that you'll be at #DevFestLagos2025!</h3>
-          
           <button className="download-btn" onClick={handleDownload}>
             DOWNLOAD DP
           </button>

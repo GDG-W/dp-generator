@@ -137,7 +137,9 @@
   .dpmaker-container .title {
     font-size: 24px;
   }
-  
+  .dpmaker-container .header{
+    padding: 0 1rem;
+  }
   .samples-grid {
     grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
