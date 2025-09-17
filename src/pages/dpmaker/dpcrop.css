@@ -16,8 +16,8 @@
   width: 100%;
   height: auto;
   display: block;
-  max-height: 400px;
-  object-fit: cover;
+  max-height: 500px !important;
+  object-fit: contain;
   filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
 }
 

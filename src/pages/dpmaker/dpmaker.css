@@ -43,8 +43,8 @@
   text-align: center;
   position: relative;
   transition: all 0.3s ease;
-  width: 300px;
-  min-height: 300px;
+  width: 500px;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
