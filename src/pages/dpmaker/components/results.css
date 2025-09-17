@@ -30,6 +30,9 @@
   box-sizing: border-box;
   flex-shrink: 0;
   object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
 .user-image-container {
