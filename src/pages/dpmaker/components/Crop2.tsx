@@ -1,6 +1,3 @@
-
-
-
 import { useState, useCallback } from "react";
 import "../dpcrop.css";
 
