@@ -7,7 +7,6 @@
 
 .image-preview-area {
   position: relative;
-  width: 100%;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -18,118 +17,55 @@
   display: block;
   max-height: 500px !important;
   object-fit: contain;
-  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
 }
 
-.crop-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+.custom-react-crop {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.ReactCrop__crop-selection {
+  border: 3px solid #f6b51e; 
 }
 
-.crop-selection {
-  border: 4px dashed #F6B51E;
+.ReactCrop__drag-bar {
+  background-color: #F4D03F;
+}
+
+.ReactCrop__crop-selection::after {
+  display: none;
+}
+
+.ReactCrop {
   border-radius: 8px;
-  position: absolute;
-  animation: dashRotate 2s linear infinite;
-  cursor: default;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-mask-image: radial-gradient(square at center, transparent 0%, black 70%);
-  mask-image: radial-gradient(square at center, transparent 0%, black 70%);
-  backdrop-filter: brightness(2.5);
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.171);
+  overflow: hidden;
 }
 
-.crop-handle {
-  background: #F6B51E;
-  color: white;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: bold;
-  pointer-events: none;
+.ReactCrop__drag-handle:hover {
+  background-color: #F4D03F;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
 }
-
-.crop-handle-move {
-  background: rgba(246, 181, 30, 0.9);
-  border: 1px solid #F6B51E;
-}
-
-.resize-handle {
-  position: absolute;
-  background: #F6B51E;
-  border: 2px solid white;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  z-index: 10;
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.resize-handle-tl {
-  top: -6px;
-  left: -6px;
-  cursor: nw-resize;
-}
-
-.resize-handle-tr {
-  top: -6px;
-  right: -6px;
-  cursor: ne-resize;
-}
-
-.resize-handle-bl {
-  bottom: -6px;
-  left: -6px;
-  cursor: sw-resize;
-}
-
-.resize-handle-br {
-  bottom: -6px;
-  right: -6px;
-  cursor: se-resize;
-}
-
-.resize-handle:hover {
-  background: #FFD700;
-  transform: scale(1.2);
-}
-
 @keyframes dashRotate {
-  0% {
-    border-color: #F6B51E;
+  from {
+    stroke-dashoffset: 0;
   }
-  50% {
-    border-color: #FFD700;
-  }
-  100% {
-    border-color: #F6B51E;
+  to {
+    stroke-dashoffset: 100;
   }
 }
 
 .action-buttons {
   display: flex;
-  gap: 1rem;
-  justify-content: space-evenly;
+  gap: 16px;
   width: 100%;
 }
-
 .replace-photo-btn {
   background: #FFECC0;
   font-family: 'Akira', 'Arial Black', sans-serif;
   color: #141414;
   border: none;
-  padding: .5rem .5rem;
+  padding: 16px 36px;
   font-size: 16px;
   font-weight: 800;
   border-radius: 36px;
@@ -152,49 +88,31 @@
   text-transform: uppercase;
   opacity: 1;
   padding: .5rem 2rem;
+  letter-spacing: -2%;
 }
+ .ReactCrop__drag-handle {
+    width: 24px;
+    height: 24px;
+  }
 
-@media (max-width: 768px) {
-.image-preview-area {
-  width: 100%;
-  height: 100%;
+  @media (max-width: 768px) {
+    .image-preview-area {
+      border-radius:24px;
+      max-width: 90%;
 }
-.crop-selection {
-  cursor: move;
-  display: flex;
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.resize-handle {
-  width: 20px;
-  height: 20px;
-  border: 3px solid white;
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.resize-handle-tl {
-  top: -10px;
-  left: -10px;
-}
-.resize-handle-tr {
-  top: -10px;
-  right: -10px;
-}
-.resize-handle-bl {
-  bottom: -10px;
-  left: -10px;
-}
-.resize-handle-br {
-  bottom: -10px;
-  right: -10px;
-}
-.crop-selection:active {
-  border-color: #FFD700;
-}
-.resize-handle:active {
-  background: #FFD700;
-  transform: scale(1.3);
-}
-}
+    .action-buttons {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 1rem;
+        max-width: 100%;
+
+  }
+  .replace-photo-btn{
+    padding: 16px 36px;
+    
+  }
+  .next-btn {
+    padding: 16px;
+  }
+  }
+  

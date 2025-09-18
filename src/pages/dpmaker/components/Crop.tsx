@@ -23,7 +23,6 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
   const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const { width, height } = e.currentTarget;
 
-    // Set initial square crop
     const size = Math.min(width, height) * 0.6;
     const x = (width - size) / 2;
     const y = (height - size) / 2;
@@ -49,7 +48,7 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
   const getCroppedImg = async (
     image: HTMLImageElement,
     crop: PixelCrop,
-    fileName: string = "cropped_image.jpg"
+    _fileName: string = "cropped_image.jpg"
   ): Promise<string> => {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -61,27 +60,21 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
 
-    // Use the actual pixel dimensions from the crop
     const pixelRatio = window.devicePixelRatio || 1;
     const cropWidth = crop.width * scaleX;
     const cropHeight = crop.height * scaleY;
 
-    // Set canvas size to maintain high resolution
     canvas.width = cropWidth * pixelRatio;
     canvas.height = cropHeight * pixelRatio;
 
-    // Scale the canvas back down using CSS
     canvas.style.width = `${cropWidth}px`;
     canvas.style.height = `${cropHeight}px`;
 
-    // Scale the context to match device pixel ratio
     ctx.scale(pixelRatio, pixelRatio);
 
-    // Enable image smoothing for better quality
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
 
-    // Draw the cropped image
     ctx.drawImage(
       image,
       crop.x * scaleX,
@@ -94,7 +87,6 @@ export const Crop = ({ image, onCrop, onReplacePhoto }: CropProps) => {
       cropHeight
     );
 
-    // Return high-quality JPEG instead of PNG for better file size
     return canvas.toDataURL("image/jpeg", 0.95);
   };
 

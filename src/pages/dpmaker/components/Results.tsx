@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import devfestLogo from '../../../assets/images/home/devfestlogo.png';
 import blueBackground from '../../../assets/images/background/blue.png';
 import orangeBackground from '../../../assets/images/background/orange.png';
 import purpleBackground from '../../../assets/images/background/purple.png';
@@ -30,8 +29,6 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
     try {
       const html2canvas = (await import('html2canvas')).default;
       const canvas = await html2canvas(previewElement, {
-        // width: 400,
-        // height: 400,
         scale: 2, 
         useCORS: true,
         allowTaint: true,

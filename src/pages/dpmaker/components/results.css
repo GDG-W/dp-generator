@@ -203,7 +203,7 @@
   margin: 0;
 }
 .preview-section{
-  width: 100%;
+  width: 361px;
   max-width: 400px;
   padding: 0;
     margin: 0 auto;
@@ -222,11 +222,16 @@
 .frame-message {
   font-size: 10px;
 }
+.background-selector {
+  padding: 16px;
+}
+.download-btn{
+  width: 361px;
+}
 .customization-section {
   width: 100%;
   flex: none;
   padding: 0px; 
-
 }
 .customization-section h3 {
 display: none;

@@ -1,5 +1,5 @@
 import { useState} from 'react';
-import { Gemini, Prompt } from '../../../assets/svg/svg-export';
+import { Gemini } from '../../../assets/svg/svg-export';
 
 interface Part {
     inlineData?: {
@@ -268,8 +268,6 @@ export const AICustomize = ({ image, originalCroppedImage, userName, onUserNameC
                                             }
                                         }}
                                     />
-                                    {/* <div style={{ marginBottom: '8px' }}>
-                                    </div> */}
                                     <button
                                         className="apply-btn"
                                         onClick={handleApply}
@@ -284,6 +282,11 @@ export const AICustomize = ({ image, originalCroppedImage, userName, onUserNameC
                                     <button
                                             onClick={handleReset}
                                             className="undo-btn"
+                                            disabled={isLoading && !geminiPrompt.trim()}
+                                            style={{
+                                                opacity: isLoading && !geminiPrompt.trim() ? 0.6 : 1,
+                                                cursor: isLoading && !geminiPrompt.trim() ? 'not-allowed' : 'pointer'
+                                            }}
                                         >
                                             UNDO
                                         </button>
@@ -291,12 +294,6 @@ export const AICustomize = ({ image, originalCroppedImage, userName, onUserNameC
                             </div>
                         )}
                     </div>
-                </div>
-            </div>
-
-            <div className="prompt-helper">
-                <div className="helper-bubble">
-                    <Prompt/>
                 </div>
             </div>
         </>
