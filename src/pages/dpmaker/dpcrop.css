@@ -25,27 +25,15 @@
   margin: 0 auto;
 }
 .ReactCrop__crop-selection {
-  border: 3px solid #f6b51e; 
+  border: 4px dashed #F4D03F!important;
+  animation: none !important;
+  background: none !important;
+  border-radius: 16px !important;
 }
-
-.ReactCrop__drag-bar {
-  background-color: #F4D03F;
-}
-
-.ReactCrop__crop-selection::after {
-  display: none;
-}
-
-.ReactCrop {
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.ReactCrop__drag-handle:hover {
-  background-color: #F4D03F;
-  transform: scale(1.1);
-  transition: all 0.2s ease;
-}
+.ReactCrop__drag-handle {
+   background-color: transparent !important;
+   border: none !important;
+  }
 @keyframes dashRotate {
   from {
     stroke-dashoffset: 0;
@@ -90,10 +78,7 @@
   padding: .5rem 2rem;
   letter-spacing: -2%;
 }
- .ReactCrop__drag-handle {
-    width: 24px;
-    height: 24px;
-  }
+
 
   @media (max-width: 768px) {
     .image-preview-area {
