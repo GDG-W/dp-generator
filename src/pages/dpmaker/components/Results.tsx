@@ -22,37 +22,100 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
     { name: 'White', image: whiteBackground }
   ];
 
-  const handleDownload = async () => {
+  const generateImage = async (): Promise<string> => {
     const previewElement = document.querySelector('.dp-preview') as HTMLElement;
-    if (!previewElement) return;
+    if (!previewElement) return '';
 
     try {
       const html2canvas = (await import('html2canvas')).default;
       const canvas = await html2canvas(previewElement, {
-        scale: 2, 
+        scale: 2,
         useCORS: true,
         allowTaint: true,
         backgroundColor: null
       });
-
-      const link = document.createElement('a');
-      link.download = `${userName}-DevFestLagos.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+      
+      return canvas.toDataURL('image/png');
     } catch (error) {
-      console.error('Download failed:', error);
-      alert('Please right-click on the preview image and select "Save image as..."');
+      console.error('Image generation failed:', error);
+      return '';
     }
   };
 
-  const handleShare = (platform: 'twitter' | 'linkedin' | 'instagram') => {
+  const handleDownload = async () => {
+    const imageUrl = await generateImage();
+    if (!imageUrl) return;
+
+    const link = document.createElement('a');
+    link.download = `${userName}-DevFestLagos.png`;
+    link.href = imageUrl;
+    link.click();
+  };
+
+  const handleShare = async (platform: 'twitter' | 'linkedin' | 'instagram') => {
+    const imageUrl = await generateImage();
     const message = encodeURIComponent(`I'll be at #DevFestLagos2025!`);
-    const urls = {
-      twitter: `https://twitter.com/intent/tweet?text=${message}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin)}`,
-      instagram: `https://www.instagram.com`
-    };
-    window.open(urls[platform], '_blank');
+    
+    // Create a Blob from the image data URL
+    const imageBlob = await fetch(imageUrl).then(res => res.blob());
+    const imageFile = new File([imageBlob], 'devfest-dp.png', { type: 'image/png' });
+
+    try {
+      // Try native sharing first (works on mobile)
+      if (navigator.share && navigator.canShare) {
+        const shareData = {
+          title: 'DevFest Lagos 2025',
+          text: `I'll be at #DevFestLagos2025!`,
+          files: [imageFile],
+          url: window.location.origin
+        };
+
+        if (navigator.canShare(shareData)) {
+          await navigator.share(shareData);
+          return;
+        }
+      }
+
+      // Platform-specific sharing as fallback
+      switch (platform) {
+        case 'twitter':
+          // Twitter doesn't support direct image sharing via URL
+          // We'll open tweet composer with text
+          window.open(
+            `https://twitter.com/intent/tweet?text=${message}&url=${encodeURIComponent(window.location.origin)}`,
+            '_blank'
+          );
+          break;
+
+        case 'linkedin':
+          // LinkedIn sharing
+          window.open(
+            `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin)}`,
+            '_blank'
+          );
+          break;
+
+        case 'instagram':
+          // For Instagram, download the image first then prompt to share
+          const link = document.createElement('a');
+          link.href = imageUrl;
+          link.download = `${userName}-DevFestLagos.png`;
+          link.click();
+          
+          setTimeout(() => {
+            window.open('https://www.instagram.com', '_blank');
+            alert('1. Open Instagram\n2. Create a new post\n3. Select the downloaded image\n4. Add the hashtag #DevFestLagos2025');
+          }, 1000);
+          break;
+      }
+    } catch (error) {
+      console.error('Sharing failed:', error);
+      // Fallback to download
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.download = `${userName}-DevFestLagos.png`;
+      link.click();
+    }
   };
 
   return (
