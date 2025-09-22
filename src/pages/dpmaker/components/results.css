@@ -105,6 +105,9 @@
   padding: 10px 20px;
   border-radius: 15px;
   z-index: 3;
+  max-width: calc(100% - 100px); /* Leave space on sides */
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .user-name {
@@ -115,6 +118,10 @@
   color: #1a1a1a;
   margin: 0;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 .user-name[data-length="long"] {
   font-size: 18px;
@@ -122,6 +129,8 @@
 
 .user-name[data-length="very-long"] {
   font-size: 16px;
+  white-space: normal;
+  word-wrap: break-word;
 }
 .background-options {
   display: flex;
@@ -228,6 +237,13 @@
     height: auto;
     aspect-ratio: 1/1;
   } 
+  .user-name[data-length="long"] {
+  font-size: 16px;
+}
+
+.user-name[data-length="very-long"] {
+  font-size: 14px;
+}
 .frame-message {
   font-size: 10px;
 }
