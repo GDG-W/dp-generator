@@ -3,7 +3,7 @@ import blueBackground from '../../../assets/images/background/blue.png';
 import orangeBackground from '../../../assets/images/background/orange.png';
 import purpleBackground from '../../../assets/images/background/purple.png';
 import whiteBackground from '../../../assets/images/background/yellow.png';
-import {Top, Instagram, LinkedIn, X, DevfestLogo} from '../../../assets/svg/svg-export';
+import {Top, Instagram, LinkedIn, X, DevfestLogoCorner} from '../../../assets/svg/svg-export';
 import './results.css';
 
 interface ResultsProps {
@@ -134,8 +134,7 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
               </div>
               
               <div className="devfest-logo">
-                <DevfestLogo/>
-                <p>DevFest Lagos</p>
+                <DevfestLogoCorner/>
               </div>
               
               <div className="user-name-overlay">
