@@ -53,70 +53,65 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
   };
 
   const handleShare = async (platform: 'twitter' | 'linkedin' | 'instagram') => {
-    const imageUrl = await generateImage();
-    const message = encodeURIComponent(`I'll be at #DevFestLagos2025!`);
-    
-    // Create a Blob from the image data URL
-    const imageBlob = await fetch(imageUrl).then(res => res.blob());
-    const imageFile = new File([imageBlob], 'devfest-dp.png', { type: 'image/png' });
+  const imageUrl = await generateImage();
+  if (!imageUrl) return;
 
-    try {
-      // Try native sharing first (works on mobile)
-      if (navigator.share && navigator.canShare) {
-        const shareData = {
-          title: 'DevFest Lagos 2025',
-          text: `I'll be at #DevFestLagos2025!`,
-          files: [imageFile],
-          url: window.location.origin
-        };
+  const message = `I'll be at #DevFestLagos2025!`;
+  const imageBlob = await fetch(imageUrl).then(res => res.blob());
+  const imageFile = new File([imageBlob], 'devfest-dp.png', { type: 'image/png' });
 
-        if (navigator.canShare(shareData)) {
-          await navigator.share(shareData);
-          return;
-        }
-      }
-
-      // Platform-specific sharing as fallback
-      switch (platform) {
-        case 'twitter':
-          // Twitter doesn't support direct image sharing via URL
-          // We'll open tweet composer with text
-          window.open(
-            `https://twitter.com/intent/tweet?text=${message}&url=${encodeURIComponent(window.location.origin)}`,
-            '_blank'
-          );
-          break;
-
-        case 'linkedin':
-          // LinkedIn sharing
-          window.open(
-            `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin)}`,
-            '_blank'
-          );
-          break;
-
-        case 'instagram':
-          // For Instagram, download the image first then prompt to share
-          const link = document.createElement('a');
-          link.href = imageUrl;
-          link.download = `${userName}-DevFestLagos.png`;
-          link.click();
-          
-          setTimeout(() => {
-            window.open('https://www.instagram.com', '_blank');
-            alert('1. Open Instagram\n2. Create a new post\n3. Select the downloaded image\n4. Add the hashtag #DevFestLagos2025');
-          }, 1000);
-          break;
-      }
-    } catch (error) {
-      console.error('Sharing failed:', error);
-      // Fallback to download
-      const link = document.createElement('a');
-      link.href = imageUrl;
-      link.download = `${userName}-DevFestLagos.png`;
-      link.click();
+  try {
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+      await navigator.share({
+        title: 'DevFest Lagos 2025',
+        text: message,
+        files: [imageFile],
+      });
+      return;
     }
-  };
+
+    const encodedMsg = encodeURIComponent(message);
+    const encodedUrl = encodeURIComponent(window.location.origin);
+
+    switch (platform) {
+      case 'twitter':
+        window.open(
+          `https://twitter.com/intent/tweet?text=${encodedMsg}&url=${encodedUrl}`,
+          '_blank'
+        );
+        break;
+
+      case 'linkedin':
+        window.open(
+          `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+          '_blank'
+        );
+        break;
+
+      case 'instagram':
+        const link = document.createElement('a');
+        link.href = imageUrl;
+        link.download = `DevFestLagos-${userName}.png`;
+        link.click();
+
+        setTimeout(() => {
+          window.open('https://www.instagram.com', '_blank');
+          alert(
+            '1. Open Instagram\n2. Create a new post\n3. Select the downloaded image\n4. Add the hashtag #DevFestLagos2025'
+          );
+        }, 1000);
+        break;
+    }
+  } catch (error) {
+    console.error('Sharing failed:', error);
+
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = `DevFestLagos-${userName}.png`;
+    link.click();
+  }
+};
+
 
   return (
     <div className="results-container">
@@ -144,7 +139,13 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
               </div>
               
               <div className="user-name-overlay">
-                <h2 className="user-name">{userName}</h2>
+                <h2 className="user-name" 
+                data-length = {userName.length > 30 
+                ? "very-long"
+                : userName.length > 20
+                ? "long"
+                : "normal"
+                }>{userName}</h2>
               </div>
             </div>
             <div className="user-image-container">

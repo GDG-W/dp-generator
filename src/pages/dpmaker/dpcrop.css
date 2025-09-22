@@ -31,7 +31,7 @@
   border-radius: 16px !important;
 }
 .ReactCrop__drag-handle {
-   background-color: transparent !important;
+   background-color: #F4D03F !important;
    border: none !important;
   }
 @keyframes dashRotate {
