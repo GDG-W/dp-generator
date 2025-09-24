@@ -6,27 +6,5 @@ import type { RouteProps } from "./type";
 export const routes: RouteProps[] = [
   { path: "/", element: <Home /> },
   { path: "/create", element: <DPMaker /> },
-  // {
-  //   path: "/customize",
-  //   element: (
-  //     <AICustomize
-  //       image=""
-  //       originalCroppedImage=""
-  //       userName=""
-  //       onUserNameChange={() => {}}
-  //       onGenerateDP={() => {}}
-  //     />
-  //   )
-  // },
-  // {
-  //   path: "/crop",
-  //   element: (
-  //     <Crop
-  //       image=""
-  //       onCrop={() => {}}
-  //       onReplacePhoto={() => {}}
-  //     />
-  //   )
-  // },
   { path: "/upload", element: <Upload onImageUpload={() => {}} /> },
 ];

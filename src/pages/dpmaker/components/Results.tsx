@@ -4,7 +4,7 @@ import orangeBackground from '../../../assets/images/background/orange.png';
 import purpleBackground from '../../../assets/images/background/purple.png';
 import whiteBackground from '../../../assets/images/background/yellow.png';
 import {Top, Instagram, LinkedIn, X, DevfestLogoCorner} from '../../../assets/svg/svg-export';
-import './results.css';
+import '../results.css';
 
 interface ResultsProps {
   userName: string;
