@@ -86,15 +86,13 @@
       max-width: 90%;
 }
     .action-buttons {
-    flex-direction: column;
-    gap: 16px;
-    padding: 0 1rem;
-        max-width: 100%;
-
+      flex-direction: column;
+      gap: 16px;
+      padding: 0 1rem;
+      max-width: 100%;
   }
   .replace-photo-btn{
     padding: 16px 36px;
-    
   }
   .next-btn {
     padding: 16px;
