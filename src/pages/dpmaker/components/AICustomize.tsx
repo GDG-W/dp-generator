@@ -76,7 +76,7 @@ export const AICustomize = ({ image, originalCroppedImage, userName, onUserNameC
                 });
             }
 
-            const apiKey = "AIzaSyBrabFrEopQokcbg-962BQFLMz7Me74CyQ";
+            const apiKey = import.meta.env.VITE_GEMINI_KEY;
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${apiKey}`;
 
             const payload = {
