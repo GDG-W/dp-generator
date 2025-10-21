@@ -27,7 +27,7 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
     try {
       const html2canvas = (await import('html2canvas')).default;
       const canvas = await html2canvas(previewElement, {
-        scale: 2,
+        scale: 4,
         useCORS: true,
         allowTaint: true,
         backgroundColor: null
