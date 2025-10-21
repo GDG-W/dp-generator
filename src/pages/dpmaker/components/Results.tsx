@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import blueBackground from '../../../assets/images/background/blue.png';
-import orangeBackground from '../../../assets/images/background/orange.png';
-import purpleBackground from '../../../assets/images/background/purple.png';
-import whiteBackground from '../../../assets/images/background/yellow.png';
 import {Top, Instagram, LinkedIn, X, DevfestLogoCorner} from '../../../assets/svg/svg-export';
+import { BlueBackground, GreenBackground, PinkBackground, OrangeBackground, WhiteBackground } from '../../../assets/svg/svg-export';
 import '../results.css';
 
 interface ResultsProps {
@@ -13,13 +10,14 @@ interface ResultsProps {
 }
 
 export const Results = ({ userName, finalImage}: ResultsProps) => {
-  const [selectedBackground, setSelectedBackground] = useState(blueBackground);
+  const [selectedBackground, setSelectedBackground] = useState(<BlueBackground />);
 
   const backgroundOptions = [
-    { name: 'Blue', image: blueBackground },
-    { name: 'Orange', image: orangeBackground },
-    { name: 'Purple', image: purpleBackground },
-    { name: 'White', image: whiteBackground }
+    { name: 'Blue', component: <BlueBackground /> },
+    { name: 'Orange', component: <OrangeBackground /> },
+    { name: 'Green', component: <GreenBackground /> },
+    { name: 'Pink', component: <PinkBackground /> },
+    { name: 'White', component: <WhiteBackground /> }
   ];
 
   const generateImage = async (): Promise<string> => {
@@ -117,14 +115,10 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
     <div className="results-container">
       <div className="results-content">
         <div className="preview-section">
-          <div 
-            className="dp-preview" 
-            style={{ 
-              backgroundImage: `url(${selectedBackground})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >            
+          <div className="dp-preview">
+            <div className="background-svg">
+              {selectedBackground}
+            </div>
             <div className="frame-overlay">
               <div className="frame-message">
                 <span>I can't wait to be at</span>
@@ -156,15 +150,14 @@ export const Results = ({ userName, finalImage}: ResultsProps) => {
               {backgroundOptions.map((bg) => (
                 <button
                   key={bg.name}
-                  className={`background-option ${selectedBackground === bg.image ? 'selected' : ''}`}
-                  style={{ 
-                    backgroundImage: `url(${bg.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                  onClick={() => setSelectedBackground(bg.image)}
+                  className={`background-option ${selectedBackground.type === bg.component.type ? 'selected' : ''}`}
+                  onClick={() => setSelectedBackground(bg.component)}
                   title={bg.name}
-                />
+                >
+                  <div className="background-preview">
+                    {bg.component}
+                  </div>
+                </button>
               ))}
             </div>
           </div>
