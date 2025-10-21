@@ -91,23 +91,22 @@
 .devfest-logo {
   position: absolute;
   top: 33px;
-  right: 30px;
+  right: 10px;
   
 }
 .frame-message {
-  font-family: 'Inter', Arial, sans-serif;
   position: absolute;
   top: 30px;
   left: 34px;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
   padding: 10px;
-  text-shadow: 2px 2px 4px rgb(0, 0, 0),
-               0px 0px 8px rgb(0, 0, 0);
 }
 .frame-message span {
   display: block;
+  text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.903);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Inter', Arial, sans-serif;
 }
 .user-name-overlay {
   position: absolute;
@@ -124,7 +123,7 @@
 }
 
 .user-name {
-  font-size: 24px;
+  font-size: 18px;
   font-family: 'Inter', Arial, sans-serif;
   font-style: bold;
   font-weight: 700;
