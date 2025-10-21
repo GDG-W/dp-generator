@@ -50,7 +50,7 @@ export const DevfestLogo = ({width, height} : TSvgExports)  => (
 )
 
 export const DevfestLogoCorner = ({width, height} : TSvgExports)  => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width || "188"} height={height || "78"} viewBox="0 0 198 83" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width={width || "188"} height={height || "59"} viewBox="0 0 198 83" fill="none">
 <path d="M 15.6621 0 H 197 V 67 H 47.6621 C 29.989 67 15.6621 52.6731 15.6621 35 V 0 Z" fill="white"/>
 <path d="M45.0537 26.1889L38.2452 31.0814C36.8186 32.1065 36.4931 34.094 37.5182 35.5206L37.522 35.5258C38.5471 36.9524 40.5346 37.2779 41.9612 36.2528L48.7697 31.3603C50.1963 30.3352 50.5218 28.3477 49.4966 26.921L49.4929 26.9159C48.4678 25.4892 46.4803 25.1638 45.0537 26.1889Z" fill="#EA4335" stroke="#1E1E1E" stroke-width="0.347327" stroke-miterlimit="10"/>
 <path d="M37.522 31.8062L37.5182 31.8114C36.4931 33.238 36.8186 35.2256 38.2452 36.2507L45.0537 41.1431C46.4803 42.1683 48.4678 41.8428 49.4929 40.4162L49.4966 40.411C50.5218 38.9844 50.1963 36.9969 48.7697 35.9717L41.9612 31.0793C40.5346 30.0542 38.5471 30.3796 37.522 31.8062Z" fill="#4285F4" stroke="#1E1E1E" stroke-width="0.347327" stroke-miterlimit="10"/>
